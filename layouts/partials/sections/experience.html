@@ -1,130 +1,102 @@
 {{ if .Site.Params.experience.enable | default false }}
-<section id="experience" class="py-5">
-    <div class="container">
-        <h3 class="text-center">{{ .Site.Params.experience.title | default "Experience" }}</h3>
-        <div class="row justify-content-center">
-            <div class="col-sm-12 col-md-8 col-lg-8 py-5">
-                <div class="experience-container px-3 pt-2">
-                    <ul class="nav nav-pills mb-3 bg-transparent primary-font" id="pills-tab" role="tablist">
-                        {{ range $index, $element := .Site.Params.experience.items }}
-                        {{ if (eq $index 0) }}
-                        <li class="nav-item px-1 bg-transparent" role="presentation">
-                            <div 
-                                class="nav-link active bg-transparent" 
-                                aria-selected="true" 
-                                role="tab" 
-                                data-bs-toggle="pill"
-                                id='{{ replace .company " " "-" }}-{{ replace .date " " "-" }}-tab'
-                                data-bs-target='#pills-{{ replace .company " " "-" }}-{{ replace .date " " "-" }}'
-                                aria-controls='{{ replace .company " " "-" }}-{{ replace .date " " "-" }}' 
-                            >
-                                {{ .company }}
-                            </div>
-                        </li>
-                        {{ else }}
-                        <li class="nav-item px-1 bg-transparent" role="presentation">
-                            <div 
-                                class="nav-link bg-transparent" 
-                                aria-selected="true" 
-                                role="tab" 
-                                data-bs-toggle="pill"
-                                id='{{ replace .company " " "-" }}-{{ replace .date " " "-" }}-tab'
-                                data-bs-target='#pills-{{ replace .company " " "-" }}-{{ replace .date " " "-" }}' 
-                                aria-controls='{{ replace .company " " "-" }}-{{ replace .date " " "-" }}'
-                            >
-                                {{ .company }}
-                            </div>
-                        </li>
-                        {{ end }}
-                        {{ end }}
-                    </ul>
-                    <div class="tab-content pb-5 pt-2 bg-transparent primary-font" id="pills-tabContent">
-                        {{ range $index, $element := .Site.Params.experience.items }}
-                        {{ if (eq $index 0) }}
-                        <div 
-                            class="tab-pane fade show active bg-transparent" 
-                            role="tabpanel"
-                            id='pills-{{ replace .company " " "-" }}-{{ replace .date " " "-" }}'
-                            aria-labelledby='pills-{{ replace .company " " "-" }}-{{ replace .date " " "-" }}-tab'
-                        >
-                            <div>
-                                <span class="h4">{{ .job }}</span>
-                                <small>-</small>
-                                <a href="{{ .companyUrl }}" target="_blank">{{ .company }}</a>
-                                <div class="pb-1">
-                                    <small>{{ .date }}</small>
-                                    {{ if .info.enable | default true }}
-                                    <span class="p-2">
-                                        <span 
-                                            style="cursor: pointer;" 
-                                            data-bs-toggle="tooltip" 
-                                            data-bs-placement="top" 
-                                            data-bs-original-title={{ .info.content | default (print "Working as a " .job " at " .company ) }}
-                                        >
-                                            <i class="fas fa-info-circle fa-xs"></i>
-                                        </span>
-                                    </span>
-                                    {{ end }}
-                                </div>
-
-                                {{ if .featuredLink.enable | default false }}
-                                <div class="py-2 featuredLink">
-                                    <a class="p-2 px-4 btn btn-outline-primary btn-sm" href={{ .featuredLink.url | default "#" }} target="_blank">
-                                        {{ .featuredLink.name | default "Featured Link" }} 
-                                    </a>
-                                </div>
-                                {{ end }}
-                            </div>
-
-                            {{ .content | markdownify}}
-                        </div>
-                        {{ else }}
-                        <div 
-                            class="tab-pane fade bg-transparent" 
-                            role="tabpanel"
-                            id='pills-{{ replace .company " " "-" }}-{{ replace .date " " "-" }}'
-                            aria-labelledby='pills-{{ replace .company " " "-" }}-{{ replace .date " " "-" }}-tab'
-                        >
-                            <div>
-                                <span class="h4">{{ .job }}</span>
-                                <small>-</small>
-                                <a href="{{ .companyUrl }}" target="_blank">{{ .company }}</a>
-                                
-                                <div class="pb-1">
-                                    <small>{{ .date }}</small>
-                                    {{ if .info.enable | default true }}
-                                    <span class="p-2">
-                                        <span 
-                                            style="cursor: pointer;" 
-                                            data-bs-toggle="tooltip" 
-                                            data-bs-placement="top" 
-                                            data-bs-original-title={{ .info.content | default (print "Worked as a " .job " at " .company ) }}
-                                        > 
-                                            <i class="fas fa-info-circle fa-xs"></i>
-                                        </span>
-                                    </span>
-                                    {{ end }}
-                                </div>
-                                
-                                {{ if .featuredLink.enable | default false }}
-                                <div class="py-2 featuredLink">
-                                    <a class="p-2 px-4 btn btn-outline-primary btn-sm" href={{ .featuredLink.url | default "#" }} target="_blank">
-                                        {{ .featuredLink.name | default "Featured Link" }} 
-                                    </a>
-                                </div>
-                                {{ end }}
-                            </div>
-
-                            <div class="pt-2">
-                                {{ .content | markdownify}}
-                            </div>
-                        </div>
-                        {{ end }}
-                        {{ end }}
-                    </div>
+<div id="experience" class="h-screen py-20 px-4 mb-20">
+  <div class="container mx-auto h-full">
+    <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 tracking-wide animate-fade-in" data-aos="zoom-in">
+      <i class="fas fa-briefcase text-pink-500 mr-4 animate-bounce"></i>
+      {{ .Site.Params.experience.title | default "Experience" }}
+    </h2>
+    <div class="w-full max-h-[calc(100vh-200px)] overflow-y-auto" data-aos="fade-up">
+      {{ range (where .Site.RegularPages "Section" "experience") }}
+        <div class="rounded-lg p-6 bg-white shadow-lg hover:shadow-xl transition-all duration-300">
+         
+          <div class="flex flex-wrap justify-center gap-20 md:gap-20 mb-6 w-full p-4 grid grid-cols-4 md:grid-cols-6">
+            {{ range .Params.skills }}
+              {{ if eq . "JavaScript" }}
+                <div class="flex flex-col items-center group">
+                  <i class="fab fa-js text-yellow-400 text-2xl md:text-4xl group-hover:scale-125 transition-all duration-300 transform group-hover:rotate-12 hover:animate-bounce"></i>
+                  <span class="text-xs md:text-sm mt-2">JavaScript</span>
                 </div>
-            </div>
+              {{ else if eq . "HTML" }}
+                <div class="flex flex-col items-center group">
+                  <i class="fab fa-html5 text-orange-500 text-2xl md:text-4xl group-hover:scale-125 transition-all duration-300 transform group-hover:rotate-12 hover:animate-bounce"></i>
+                  <span class="text-xs md:text-sm mt-2">HTML</span>
+                </div>
+              {{ else if eq . "CSS" }}
+                <div class="flex flex-col items-center group">
+                  <i class="fab fa-css3-alt text-blue-600 text-2xl md:text-4xl group-hover:scale-125 transition-all duration-300 transform group-hover:rotate-12 hover:animate-bounce"></i>
+                  <span class="text-xs md:text-sm mt-2">CSS</span>
+                </div>
+              {{ else if eq . "NodeJS" }}
+                <div class="flex flex-col items-center group">
+                  <i class="fab fa-node-js text-green-600 text-2xl md:text-4xl group-hover:scale-125 transition-all duration-300 transform group-hover:rotate-12 hover:animate-bounce"></i>
+                  <span class="text-xs md:text-sm mt-2">NodeJS</span>
+                </div>
+              {{ else if eq . "Bootstrap" }}
+                <div class="flex flex-col items-center group">
+                  <i class="fab fa-bootstrap text-purple-600 text-2xl md:text-4xl group-hover:scale-125 transition-all duration-300 transform group-hover:rotate-12 hover:animate-bounce"></i>
+                  <span class="text-xs md:text-sm mt-2">Bootstrap</span>
+                </div>
+              {{ else if eq . "Tailwind" }}
+                <div class="flex flex-col items-center group">
+                  <img src="/images/tailwindcss.svg" class="w-6 h-6 md:w-8 md:h-8 group-hover:scale-125 transition-all duration-300 transform group-hover:rotate-12 hover:animate-bounce" alt="Tailwind" />
+                  <span class="text-xs md:text-sm mt-2">Tailwind</span>
+                </div>
+              {{ else if eq . "MySQL" }}
+                <div class="flex flex-col items-center group">
+                  <img src="/images/mysql.svg" class="w-6 h-6 md:w-8 md:h-8 group-hover:scale-125 transition-all duration-300 transform group-hover:rotate-12 hover:animate-bounce" alt="MySQL" />
+                  <span class="text-xs md:text-sm mt-2">MySQL</span>
+                </div>
+              {{ else if eq . "MongoDB" }}
+                <div class="flex flex-col items-center group">
+                  <img src="/images/mongodb.svg" class="w-6 h-6 md:w-8 md:h-8 group-hover:scale-125 transition-all duration-300 transform group-hover:rotate-12 hover:animate-bounce" alt="MongoDB" />
+                  <span class="text-xs md:text-sm mt-2">MongoDB</span>
+                </div>
+              {{ else if eq . "ReactJS" }}
+                <div class="flex flex-col items-center group">
+                  <i class="fab fa-react text-blue-400 text-2xl md:text-4xl group-hover:scale-125 transition-all duration-300 transform group-hover:rotate-12 hover:animate-spin"></i>
+                  <span class="text-xs md:text-sm mt-2">ReactJS</span>
+                </div>
+              {{ else if eq . "Redux" }}
+                <div class="flex flex-col items-center group">
+                  <img src="/images/redux.svg" class="w-6 h-6 md:w-8 md:h-8 group-hover:scale-125 transition-all duration-300 transform group-hover:rotate-12 hover:animate-bounce" alt="Redux" />
+                  <span class="text-xs md:text-sm mt-2">Redux</span>
+                </div>
+              {{ else if eq . "Figma" }}
+                <div class="flex flex-col items-center group">
+                  <i class="fab fa-figma text-pink-600 text-2xl md:text-4xl group-hover:scale-125 transition-all duration-300 transform group-hover:rotate-12 hover:animate-bounce"></i>
+                  <span class="text-xs md:text-sm mt-2">Figma</span>
+                </div>
+              {{ else if eq . "Canva" }}
+                <div class="flex flex-col items-center group">
+                  <img src="/images/canva.svg" class="w-6 h-6 md:w-8 md:h-8 group-hover:scale-125 transition-all duration-300 transform group-hover:rotate-12 hover:animate-bounce" alt="Canva" />
+                  <span class="text-xs md:text-sm mt-2">Canva</span>
+                </div>
+              {{ else if eq . "Express" }}
+                <div class="flex flex-col items-center group ">
+                  <div class="p-2 rounded-full w-11" style="background-color: #fff !important;">
+                    <img src="/images/express.svg" class="w-10 md:w-10 group-hover:scale-125 transition-all duration-300 transform group-hover:rotate-12 hover:animate-bounce" alt="Express" />
+                  </div>
+                  <span class="text-xs md:text-sm mt-2">Express</span>
+                </div>
+              {{ else if eq . "Laravel" }}
+                <div class="flex flex-col items-center group">
+                  <i class="fab fa-laravel text-red-600 text-2xl md:text-4xl group-hover:scale-125 transition-all duration-300 transform group-hover:rotate-12 hover:animate-bounce"></i>
+                  <span class="text-xs md:text-sm mt-2">Laravel</span>
+                </div>
+              {{ else if eq . "PHP" }}
+                <div class="flex flex-col items-center group">
+                  <i class="fab fa-php text-indigo-600 text-2xl md:text-4xl group-hover:scale-125 transition-all duration-300 transform group-hover:rotate-12 hover:animate-bounce"></i>
+                  <span class="text-xs md:text-sm mt-2">PHP</span>
+                </div>
+              {{ end }}
+            {{ end }}
+          </div>
+          <div class="prose text-center hover:scale-105 transition-transform duration-300">
+            {{ .Content }}
+          </div>
         </div>
+      {{ end }}
     </div>
-</section>
+  </div>
+</div>
 {{ end }}

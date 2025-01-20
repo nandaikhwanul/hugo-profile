@@ -1,28 +1,58 @@
 {{ if .Site.Params.about.enable | default false }}
-<section id="about" class="py-0 py-sm-5">
-    <div class="container bg-transparent">
-        <h3 class="text-center bg-transparent">{{ .Site.Params.about.title }}</h3>
-        <div class="bg-transparent row justify-content-center px-3 py-5">
-            {{ if .Site.Params.about.image }}
-            <div class="col-sm-12 col-md-8 col-lg-4 mb-5 mb-sm-0 mb-md-5 mb-lg-0 d-none d-sm-none d-md-block">
-                <div class="image d-flex px-5">
-                    <img src="{{ .Site.Params.about.image }}" class="img-thumbnail mx-auto rounded-circle" alt="">
+<div id="about" class="min-h-screen py-20 select-none">
+    <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-16 tracking-wide" data-aos="fade-down">{{ .Site.Params.about.title }}</h2>
+
+        <div class="grid gap-12 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-items-center">
+            <!-- Left Column -->
+            <div class="p-8 rounded-2xl w-full max-w-sm shadow-lg transform hover:scale-105 transition duration-300" data-aos="fade-right">
+                <div class="text-center mb-6">
+                    <span class="inline-block p-3 bg-indigo-100 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
                 </div>
+                <h3 class="text-2xl font-bold text-center mb-4">Backend Development</h3>
+                <p class="text-black text-center">
+                    {{ with site.GetPage "about.md" }}
+                        {{ (index (split .Content "</p>") 0) | safeHTML }}
+                    {{ end }}
+                </p>
+            </div>
+
+            <!-- Middle Column (Image) -->
+            {{ with site.GetPage "about.md" }}
+            <div class="relative hidden md:hidden lg:block mx-auto" data-aos="zoom-in">
+                <div class="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full filter blur-3xl opacity-20 animate-pulse"></div>
+
+                <!-- Animasi Blob -->
+                <img src="/images/blobanimation.svg" alt="blob animation" class="w-full absolute top-0 left-0 animate-float" />
+
+                <!-- Gambar dari Param atau Default -->
+                <img src="/images/office.png" 
+                     alt="About Image" 
+                     class="w-4/5 mx-auto relative z-10 drop-shadow-2xl transform hover:scale-105 transition duration-300" />
             </div>
             {{ end }}
-            <div class="col-sm-12 col-md-12 col-lg-8 content">
-                {{ .Site.Params.about.content | markdownify }}
 
-                {{ if .Site.Params.about.skills.enable }}
-                {{ .Site.Params.about.skills.title }}
-                <ul>
-                    {{ range .Site.Params.about.skills.items }}
-                    <li>{{ . | markdownify }}</li>
+            <!-- Right Column -->
+            <div class="p-8 rounded-2xl w-full max-w-sm shadow-lg transform hover:scale-105 transition duration-300" data-aos="fade-left">
+                <div class="text-center mb-6">
+                    <span class="inline-block p-3 bg-pink-100 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                        </svg>
+                    </span>
+                </div>
+                <h3 class="text-2xl font-bold text-center mb-4 text-gray-800">Frontend Development</h3>
+                <p class="text-gray-600 leading-relaxed text-center">
+                    {{ with site.GetPage "about.md" }}
+                        {{ (index (split .Content "</p>") 1) | safeHTML }}
                     {{ end }}
-                </ul>
-                {{ end }}
+                </p>
             </div>
         </div>
     </div>
-</section>
+</div>
 {{ end }}

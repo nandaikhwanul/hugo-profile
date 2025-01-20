@@ -1,0 +1,46 @@
+{{ define "title" }}
+About Me | {{ .Site.Title }}
+{{ end }}
+
+{{ define "main" }}
+<section id="about" class="min-h-screen py-20 select-none bg-gradient-to-b from-white to-gray-100">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-bold text-center mb-16 tracking-wide" data-aos="fade-down">About Me</h2>
+    
+    <div class="grid gap-12 lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
+      <!-- Backend Development Card -->
+      <div class="bg-white p-8 rounded-2xl shadow-lg transform hover:scale-105 transition duration-300" data-aos="fade-right">
+        <div class="text-center mb-6">
+          <span class="inline-block p-3 bg-indigo-100 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </span>
+        </div>
+        <h3 class="text-2xl font-bold text-center mb-4 text-gray-800">Backend Development</h3>
+        <p class="text-gray-600 leading-relaxed">I have experience and expertise in web development with a focus on Node.js, React.js, Tailwind, Bootstrap, and MongoDB. In backend development, I can build robust and scalable systems using Node.js, with capabilities such as server-side scripting, database management, and API integration.</p>
+      </div>
+
+      <!-- Center Image -->
+      <div class="relative hidden md:block lg:block" data-aos="zoom-in">
+        <div class="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full filter blur-3xl opacity-20 animate-pulse"></div>
+        <img src="blobanimation.svg" alt="blob" class="w-full absolute top-0 left-0 animate-float" />
+        <img src="office.png" alt="office" class="w-4/5 mx-auto relative z-10 drop-shadow-2xl transform hover:scale-105 transition duration-300" />
+      </div>
+
+      <!-- Frontend Development Card -->
+      <div class="bg-white p-8 rounded-2xl shadow-lg transform hover:scale-105 transition duration-300" data-aos="fade-left">
+        <div class="text-center mb-6">
+          <span class="inline-block p-3 bg-pink-100 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+            </svg>
+          </span>
+        </div>
+        <h3 class="text-2xl font-bold text-center mb-4 text-gray-800">Frontend Development</h3>
+        <p class="text-gray-600 leading-relaxed">On the frontend side, I am skilled in using React.js to create interactive and responsive user interfaces. Apart from that, I am proficient in using Tailwind and Bootstrap as CSS frameworks, as well as experience managing databases using MongoDB.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}
